@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page Title</title>
+		<link href="css/style.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="disp" id="help">Here will be help</div>
+        <table cellspacing="0" id="board" border="1px">
+            <tr id="8">
+ <td id="A8" class="white">&#x265C;</td>
+ <td id="B8" class="balck">&#x265E;</td> 
+ <td id="C8" class="white">&#x265D;</td>
+ <td id="D8" class="balck">&#x265B;</td> 
+ <td id="E8" class="white">&#x265A;</td>
+ <td id="F8" class="balck">&#x265D;</td> 
+ <td id="G8" class="white">&#x265E;</td>
+ <td id="H8" class="balck">&#x265C;</td> 
+            </tr>
+            <tr id="7">
+             
+ <td id="A7" class="balck">&#x265F;</td> 
+ <td id="B7" class="white">&#x265F;</td>
+ <td id="C7" class="balck">&#x265F;</td> 
+ <td id="D7" class="white">&#x265F;</td>
+ <td id="E7" class="balck">&#x265F;</td> 
+ <td id="F7" class="white">&#x265F;</td>
+ <td id="G7" class="balck">&#x265F;</td> 
+ <td id="H7" class="white">&#x265F;</td>
+            </tr>
+            <tr id="6">
+     <td id="A6" class="white"></td>
+     <td id="B6" class="balck"></td> 
+     <td id="C6" class="white"></td>
+     <td id="D6" class="balck"></td> 
+     <td id="E6" class="white"></td>
+     <td id="F6" class="balck"></td> 
+     <td id="G6" class="white"></td>
+     <td id="H6" class="balck"></td> 
+           </tr>
+            <tr id="5">
+    <td id="A5" class="balck"></td> 
+    <td id="B5" class="white"></td>
+    <td id="C5" class="balck"></td> 
+    <td id="D5" class="white"></td>
+    <td id="E5" class="balck"></td> 
+    <td id="F5" class="white"></td>
+    <td id="G5" class="balck"></td> 
+    <td id="H5" class="white"></td>    </tr>
+            <tr id="4">
+     <td id="A4" class="white"></td>
+     <td id="B4" class="balck"></td> 
+     <td id="C4" class="white"></td>
+     <td id="D4" class="balck"></td> 
+     <td id="E4" class="white"></td>
+     <td id="F4" class="balck"></td> 
+     <td id="G4" class="white"></td>
+     <td id="H4" class="balck"></td> 
+           
+            </tr>
+            <tr id="3">
+    <td id="A3" class="balck"></td> 
+    <td id="B3" class="white"></td>
+    <td id="C3" class="balck"></td> 
+    <td id="D3" class="white"></td>
+    <td id="E3" class="balck"></td> 
+    <td id="F3" class="white"></td>
+    <td id="G3" class="balck"></td> 
+    <td id="H3" class="white"></td>            </tr>
+            <tr id="2">
+ <td id="A2" class="white">&#x2659</td>
+ <td id="B2" class="balck">&#x2659</td> 
+ <td id="C2" class="white">&#x2659</td>
+ <td id="D2" class="balck">&#x2659</td> 
+ <td id="E2" class="white">&#x2659</td>
+ <td id="F2" class="balck">&#x2659</td> 
+ <td id="G2" class="white">&#x2659</td>
+ <td id="H2" class="balck">&#x2659</td> 
+           </tr>
+            <tr id="1">
+ <td id="A1" class="balck">&#x2656</td> 
+ <td id="B1" class="white">&#x2658</td>
+ <td id="C1" class="balck">&#x2657</td> 
+ <td id="D1" class="white">&#x2655</td>
+ <td id="E1" class="balck">&#x2654</td> 
+ <td id="F1" class="white">&#x2657</td>
+ <td id="G1" class="balck">&#x2658</td> 
+ <td id="H1" class="white">&#x2656</td>            </tr> 
+        </table>
+       <div class="disp" id="helpdub">Here will be help</div>
+	   
+		<script src="js/proces.js"></script>
+        <script>
+var numbLetters= "ABCDEFGH"
+var elBoard=document.getElementById ("board");
+var elTd =elBoard.getElementsByTagName ("td");
+var elHelp= document.getElementById ("help");
+var libFun= {9812:king,9813:queen,9814:rook,9815:elephant,9816:horse,9817:pawn,9818:king,9819:queen,9820:rook,9821:elephant,9822:horse,9823:pawn};
+var saveCl={} ;  
+var stepPers=0;
+
+elBoard.onclick=
+function  (event){
+    let target=event.target; 
+    if(target.classList. contains("green")||target.classList.contains("red")) {
+        let classY=  elBoard.getElementsByClassName("yellow");   
+        
+        target.innerHTML= classY [0].innerHTML; 
+        classY [0].innerHTML ="";
+        clear();
+       let result=checked();
+        clear();
+        
+        if(result[0]==true){
+        help.style.color="black";
+          help.innerHTML= 
+   result[1]+result[2]+" Смена хода";
+        //  console.log(result)
+          stepPers++
+        }else{
+         help.style.color="red"; 
+          help.innerHTML=result [0];
+          // возврат финуры назад 
+          for(i=0;i<elTd.length;i++){
+        elTd[i].innerHTML =save[i]; };
+          bot();     
+        }
+      }else{
+        clear(stepPers%2);
+         let chess= target.innerHTML.charCodeAt(0)>=9818?1:0;
+         if((target.innerHTML!="")&& (stepPers%2 == chess)) {
+          libFun[target.innerHTML.charCodeAt(0)]( target.cellIndex, target.parentElement.id,stepPers%2)//0-white, 1-black
+         }else{
+             let xod=(stepPers%2==0)?"БЕЛЫХ":"ЧЕРНЫХ";
+             help.style.color="red"
+             help.innerHTML="ХОД "+xod
+         }
+        
+      }
+
+ for(i=0;i< elTd.length;i++){
+     save[i]=elTd[i].innerHTML;
+ }
+ 
+helpdub.innerHTML =help.innerHTML ;
+helpdub.style.color=help.style.color;
+
+};
+
+        </script>
+    </body>
+</html>

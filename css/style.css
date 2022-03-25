@@ -1,0 +1,49 @@
+*{box-sizing:border-box ;}
+body {
+    margin:0;
+    padding:0;
+}
+table {
+    margin:0 auto;
+    width:350px;
+    height:350px;
+    text-align:center;
+    border:1px solid black;
+}
+.disp{
+    text-align:center ;
+    font-size:20px;
+    font-weight:700;
+    padding:20px 5px;
+    
+}
+#helpdub{
+    -webkit-transform:rotate(180deg);
+   // background-color:red;
+}
+td{
+    padding:0;
+    margin:0;
+    width:40px;
+    height:40px;
+    font-size:28px;
+    font-weight:600;
+    
+}
+.white{
+    
+    background-color:#fff;
+}
+.balck{
+    background-color:#888;
+}
+.red{
+    background-color:red;
+}
+.green{
+    background-color: green;
+    opacity:.4;
+}
+.yellow{
+    background-color:yellow;
+}
